@@ -1,5 +1,8 @@
+// ignore_for_file: avoid_unnecessary_containers
+
 import 'package:flutter/material.dart';
 import 'package:my_test_app/utils/app_colors.dart';
+import 'package:my_test_app/widgets/quote_widgetg.dart';
 
 class ViewQuote extends StatelessWidget {
   const ViewQuote({super.key});
@@ -62,8 +65,19 @@ class ViewQuote extends StatelessWidget {
                   ),
                 ],
               )),
+          Flexible(
+              child: ListView.builder(
+                  itemCount: myQuotes.length,
+                  itemBuilder: ((context, index) {
+                    return Container(
+                      alignment: Alignment.bottomCenter,
+                      child: QuotesWidget(
+                        quote: myQuotes[index],
+                        color: Colors.blueGrey,
+                      ),
+                    );
+                  })))
           //This needs to be completed for quote widget, I was at 56,34 min of the tutorial.
-          Container(),
         ],
       ),
     );
