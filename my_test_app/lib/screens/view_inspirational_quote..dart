@@ -3,9 +3,10 @@ import 'package:my_test_app/utils/app_colors.dart';
 
 class ViewQuote extends StatelessWidget {
   const ViewQuote({super.key});
-// This needs to be completed for view quotes, I was at 48 min of the tutorial.
+//
   @override
   Widget build(BuildContext context) {
+    List myQuotes = ["Test1", "Test2"];
     return Scaffold(
       backgroundColor: Colors.white,
       body: Stack(
@@ -61,6 +62,8 @@ class ViewQuote extends StatelessWidget {
                   ),
                 ],
               )),
+          //This needs to be completed for quote widget, I was at 56,34 min of the tutorial.
+          Container(),
         ],
       ),
     );
