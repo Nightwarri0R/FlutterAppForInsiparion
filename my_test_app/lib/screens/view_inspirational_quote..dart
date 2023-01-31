@@ -9,7 +9,7 @@ class ViewQuote extends StatelessWidget {
 //
   @override
   Widget build(BuildContext context) {
-    List myQuotes = ["Test1", "Test2"];
+    List myQuotes = ["Test1", "Test2 est2 est2 est2 est2 est2 est2 "];
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 97, 154, 180),
       body: Column(
@@ -65,14 +65,16 @@ class ViewQuote extends StatelessWidget {
                   ),
                 ],
               )),
-          Container(
+          Flexible(
               child: ListView.builder(
-                  padding: const EdgeInsets.all(20),
+                  //padding: const EdgeInsets.all(20),
                   scrollDirection: Axis.vertical,
                   shrinkWrap: true,
                   itemCount: myQuotes.length,
                   itemBuilder: ((context, index) {
                     return Container(
+                      margin: const EdgeInsets.only(
+                          right: 20, left: 20, bottom: 10),
                       child: QuotesWidget(
                         quote: myQuotes[index],
                         color: Colors.black,
@@ -80,7 +82,7 @@ class ViewQuote extends StatelessWidget {
                     );
                   }))),
 
-          //This needs to be completed for quote widget, I was at 56,34 min of the tutorial.
+          //This needs to be completed for quote widget, I was at 1 hour 1 min of the tutorial.
         ],
       ),
     );
