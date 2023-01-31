@@ -11,7 +11,7 @@ class QuotesWidget extends StatelessWidget {
       width: double.maxFinite,
       height: MediaQuery.of(context).size.height / 14,
       decoration: BoxDecoration(
-        color: Colors.grey,
+        color: Color.fromARGB(255, 255, 255, 255),
         borderRadius: BorderRadius.circular(10),
       ),
       child: Text(

@@ -11,14 +11,14 @@ class ViewQuote extends StatelessWidget {
   Widget build(BuildContext context) {
     List myQuotes = ["Test1", "Test2"];
     return Scaffold(
-      backgroundColor: Colors.white,
-      body: Stack(
+      backgroundColor: Color.fromARGB(255, 97, 154, 180),
+      body: Column(
         children: [
           Container(
             padding: const EdgeInsets.only(left: 20, top: 60),
             alignment: Alignment.topLeft,
             width: double.maxFinite,
-            height: MediaQuery.of(context).size.height / 1,
+            height: MediaQuery.of(context).size.height / 4,
             decoration: const BoxDecoration(
                 image: DecorationImage(
                     fit: BoxFit.cover,
@@ -65,18 +65,21 @@ class ViewQuote extends StatelessWidget {
                   ),
                 ],
               )),
-          Flexible(
+          Container(
               child: ListView.builder(
+                  padding: const EdgeInsets.all(20),
+                  scrollDirection: Axis.vertical,
+                  shrinkWrap: true,
                   itemCount: myQuotes.length,
                   itemBuilder: ((context, index) {
                     return Container(
-                      alignment: Alignment.bottomCenter,
                       child: QuotesWidget(
                         quote: myQuotes[index],
-                        color: Colors.blueGrey,
+                        color: Colors.black,
                       ),
                     );
-                  })))
+                  }))),
+
           //This needs to be completed for quote widget, I was at 56,34 min of the tutorial.
         ],
       ),
