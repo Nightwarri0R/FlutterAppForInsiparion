@@ -12,7 +12,7 @@ class QuotesWidget extends StatelessWidget {
       height: MediaQuery.of(context).size.height / 14,
       decoration: BoxDecoration(
         color: Color.fromARGB(255, 255, 255, 255),
-        borderRadius: BorderRadius.circular(10),
+        borderRadius: BorderRadius.circular(20),
       ),
       child: Text(
         quote,

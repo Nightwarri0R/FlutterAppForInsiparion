@@ -1,7 +1,10 @@
 // ignore_for_file: avoid_unnecessary_containers
 
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:my_test_app/utils/app_colors.dart';
+import 'package:my_test_app/widgets/button_widget.dart';
 import 'package:my_test_app/widgets/quote_widgetg.dart';
 
 class ViewQuote extends StatelessWidget {
@@ -10,6 +13,26 @@ class ViewQuote extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List myQuotes = ["Test1", "Test2 est2 est2 est2 est2 est2 est2 "];
+    final rightDeleteIcon = Container(
+      margin: EdgeInsets.only(bottom: 10),
+      color: Color.fromARGB(255, 177, 35, 0).withOpacity(0.5),
+      // ignore: sort_child_properties_last
+      child: const Icon(
+        Icons.delete_forever_sharp,
+        color: Colors.white,
+      ),
+      alignment: Alignment.center,
+    );
+    final leftIcon = Container(
+      margin: const EdgeInsets.only(bottom: 10),
+      color: const Color.fromARGB(255, 185, 187, 187).withOpacity(0.5),
+      // ignore: sort_child_properties_last
+      child: const Icon(
+        Icons.edit_note,
+        color: Colors.white,
+      ),
+      alignment: Alignment.center,
+    );
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 97, 154, 180),
       body: Column(
@@ -67,19 +90,54 @@ class ViewQuote extends StatelessWidget {
               )),
           Flexible(
               child: ListView.builder(
-                  //padding: const EdgeInsets.all(20),
                   scrollDirection: Axis.vertical,
                   shrinkWrap: true,
                   itemCount: myQuotes.length,
                   itemBuilder: ((context, index) {
-                    return Container(
-                      margin: const EdgeInsets.only(
-                          right: 20, left: 20, bottom: 10),
-                      child: QuotesWidget(
-                        quote: myQuotes[index],
-                        color: Colors.black,
-                      ),
-                    );
+                    return Dismissible(
+                        background: leftIcon,
+                        secondaryBackground: rightDeleteIcon,
+                        onDismissed: (DismissDirection direction) async {
+                          print("After confirming");
+                        },
+                        confirmDismiss: (DismissDirection direction) async {
+                          if (direction == DismissDirection.startToEnd) {
+                            showModalBottomSheet(
+                                context: context,
+                                barrierColor: Colors.transparent,
+                                backgroundColor: Colors.blueAccent,
+                                builder: (_) {
+                                  return Container(
+                                    height: 350,
+                                    child: Column(
+                                      children: [
+                                        ButtonWidget(
+                                            backgroundColor: backgroundColor,
+                                            textColor: textColor,
+                                            buttonText: buttonText),
+                                        ButtonWidget(
+                                            backgroundColor: backgroundColor,
+                                            textColor: textColor,
+                                            buttonText: buttonText)
+                                      ],
+                                    ),
+                                  );
+                                });
+                            return false;
+                          } else {
+                            return Future.delayed(const Duration(seconds: 1),
+                                () => direction == DismissDirection.endToStart);
+                          }
+                        },
+                        key: ObjectKey(index),
+                        child: Container(
+                          margin: const EdgeInsets.only(
+                              right: 20, left: 20, bottom: 10),
+                          child: QuotesWidget(
+                            quote: myQuotes[index],
+                            color: Colors.black,
+                          ),
+                        ));
                   }))),
 
           //This needs to be completed for quote widget, I was at 1 hour 1 min of the tutorial.
