@@ -1,8 +1,10 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
+import 'package:my_test_app/screens/view_inspirational_quote..dart';
 import 'package:my_test_app/utils/app_colors.dart';
 import 'package:my_test_app/widgets/button_widget.dart';
+import 'package:get/get.dart';
+
+import 'add_quote.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -44,17 +46,31 @@ class _HomeScreenState extends State<HomeScreen> {
             SizedBox(
               height: MediaQuery.of(context).size.height / 3,
             ),
-            const ButtonWidget(
-                backgroundColor: AppColors.buttonColor,
-                textColor: AppColors.buttonTextColor,
-                buttonText: "Add Quote"),
+            InkWell(
+              onTap: () {
+                Get.to(() => AddQuotePage(),
+                    transition: Transition.fade,
+                    duration: Duration(seconds: 1));
+              },
+              child: const ButtonWidget(
+                  backgroundColor: AppColors.buttonColor,
+                  textColor: AppColors.buttonTextColor,
+                  buttonText: "Add Quote"),
+            ),
             const SizedBox(
               height: 25,
             ),
-            const ButtonWidget(
-                backgroundColor: AppColors.addButtontColor,
-                textColor: AppColors.addTextbuttonColor,
-                buttonText: "Get Inspirational Quote"),
+            InkWell(
+              onTap: () {
+                Get.to(() => ViewQuote(),
+                    transition: Transition.fade,
+                    duration: Duration(seconds: 1));
+              },
+              child: const ButtonWidget(
+                  backgroundColor: AppColors.addButtontColor,
+                  textColor: AppColors.addTextbuttonColor,
+                  buttonText: "Get Inspirational Quotes"),
+            ),
           ],
         ),
         decoration: const BoxDecoration(

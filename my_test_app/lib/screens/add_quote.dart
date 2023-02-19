@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:get/get.dart';
 import 'package:my_test_app/utils/app_colors.dart';
 import 'package:my_test_app/widgets/button_widget.dart';
 import 'package:my_test_app/widgets/text_field_widget.dart';
@@ -32,11 +33,11 @@ class AddQuotePage extends StatelessWidget {
                   const SizedBox(
                     height: 60,
                   ),
-                  IconButton(
-                      onPressed: () {
-                        return;
+                  InkWell(
+                      onTap: () {
+                        Get.back();
                       },
-                      icon: const Icon(
+                      child: const Icon(
                         Icons.arrow_back_sharp,
                         color: AppColors.buttonColor,
                       ))
@@ -47,16 +48,15 @@ class AddQuotePage extends StatelessWidget {
                   TextFieldWidget(
                     textController: textEditingController,
                     placeHolderText: "Add Quote",
+                    borderRadius: 20,
+                    maxLines: 5,
                   ),
                   const SizedBox(
                     height: 25,
                   ),
                   TextFieldWidget(
-                    textController: descriptionEditingController,
-                    placeHolderText: "Author name",
-                    borderRadius: 20,
-                    maxLines: 5,
-                  ),
+                      textController: descriptionEditingController,
+                      placeHolderText: "Author name"),
                   const SizedBox(
                     height: 25,
                   ),

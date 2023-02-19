@@ -1,8 +1,5 @@
-// ignore_for_file: avoid_unnecessary_containers
-
-import 'dart:io';
-
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:my_test_app/utils/app_colors.dart';
 import 'package:my_test_app/widgets/button_widget.dart';
 import 'package:my_test_app/widgets/quote_widgetg.dart';
@@ -34,24 +31,29 @@ class ViewQuote extends StatelessWidget {
       alignment: Alignment.center,
     );
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 97, 154, 180),
+      backgroundColor: const Color.fromARGB(255, 97, 154, 180),
       body: Column(
         children: [
           Container(
-            padding: const EdgeInsets.only(left: 20, top: 60),
-            alignment: Alignment.topLeft,
-            width: double.maxFinite,
-            height: MediaQuery.of(context).size.height / 4,
-            decoration: const BoxDecoration(
-                image: DecorationImage(
-                    fit: BoxFit.cover,
-                    image: AssetImage(
-                        "assets/lockscreen-wallpapers-quote-backgrounds-1.jpg"))),
-            child: const Icon(
-              Icons.arrow_back_sharp,
-              color: Colors.white,
-            ),
-          ),
+              padding: const EdgeInsets.only(top: 60),
+              alignment: Alignment.topLeft,
+              width: double.maxFinite,
+              height: MediaQuery.of(context).size.height / 4,
+              decoration: const BoxDecoration(
+                  image: DecorationImage(
+                      fit: BoxFit.cover,
+                      image: AssetImage(
+                          "assets/lockscreen-wallpapers-quote-backgrounds-1.jpg"))),
+              // ignore: prefer_const_constructors
+              child: InkWell(
+                onTap: () {
+                  Get.back();
+                },
+                child: const Icon(
+                  Icons.arrow_back_sharp,
+                  color: Colors.white,
+                ),
+              )),
           // ignore: avoid_unnecessary_containers
           Container(
               alignment: Alignment.bottomLeft,
@@ -105,21 +107,38 @@ class ViewQuote extends StatelessWidget {
                             showModalBottomSheet(
                                 context: context,
                                 barrierColor: Colors.transparent,
-                                backgroundColor: Colors.blueAccent,
+                                backgroundColor: Colors.transparent,
                                 builder: (_) {
                                   return Container(
                                     height: 350,
-                                    child: Column(
-                                      children: [
-                                        ButtonWidget(
-                                            backgroundColor: backgroundColor,
-                                            textColor: textColor,
-                                            buttonText: buttonText),
-                                        ButtonWidget(
-                                            backgroundColor: backgroundColor,
-                                            textColor: textColor,
-                                            buttonText: buttonText)
-                                      ],
+                                    decoration: BoxDecoration(
+                                        color: const Color(0xFFB3E5FC)
+                                            .withOpacity(0.5),
+                                        borderRadius: const BorderRadius.only(
+                                            topLeft: Radius.circular(20),
+                                            topRight: Radius.circular(20))),
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(
+                                          left: 20, right: 20),
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: const [
+                                          ButtonWidget(
+                                              backgroundColor:
+                                                  AppColors.buttonColor,
+                                              textColor: Colors.white,
+                                              buttonText: "View"),
+                                          SizedBox(
+                                            height: 20,
+                                          ),
+                                          ButtonWidget(
+                                              backgroundColor:
+                                                  AppColors.buttonColor,
+                                              textColor: Colors.blueAccent,
+                                              buttonText: "Edit"),
+                                        ],
+                                      ),
                                     ),
                                   );
                                 });

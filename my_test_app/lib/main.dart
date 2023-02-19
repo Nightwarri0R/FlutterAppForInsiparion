@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:my_test_app/screens/add_quote.dart';
+import 'package:get/get.dart';
 import 'package:my_test_app/screens/home_screen.dart';
 import 'package:my_test_app/screens/view_inspirational_quote..dart';
 
@@ -13,13 +13,13 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const ViewQuote(),
+      home: const HomeScreen(),
     );
   }
 }
