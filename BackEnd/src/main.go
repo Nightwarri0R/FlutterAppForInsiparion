@@ -2,9 +2,21 @@ package main
 
 import (
 	"fmt"
+	"net/http"
+	"log"
+	"github.com/gorilla/mux"
 )
+func homePage(w http.ResponseWriter, r *http.Request) {
+	fmt.Println("HomePage")
+}
+func handleRoutes(){
+	router := mux.NewRouter()
+	router.HandleFunc("/", homePage).Methods("GET")
+	log.Fatal(http.ListenAndServe(":8090", router))
+}
 
 func main() {
+	handleRoutes()
 	allQuotes()
 	fmt.Println(quotes)
 }
