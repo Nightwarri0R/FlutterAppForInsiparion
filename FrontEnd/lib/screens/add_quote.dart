@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
+import 'package:my_test_app/controllers/data_controller.dart';
+import 'package:my_test_app/screens/view_inspirational_quote..dart';
 import 'package:my_test_app/utils/app_colors.dart';
 import 'package:my_test_app/widgets/button_widget.dart';
+import 'package:my_test_app/widgets/error_message.dart';
 import 'package:my_test_app/widgets/text_field_widget.dart';
 
 class AddQuotePage extends StatelessWidget {
@@ -11,9 +14,21 @@ class AddQuotePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    TextEditingController textEditingController = TextEditingController();
-    TextEditingController descriptionEditingController =
-        TextEditingController();
+    TextEditingController quoteDescriptionController = TextEditingController();
+    TextEditingController authorController = TextEditingController();
+
+    bool dataValidation() {
+      if (quoteDescriptionController.text.trim() == '') {
+        Message.errorMesage("Quote", "Quote cannot be empty");
+        return false;
+      } else if (authorController.text.trim() == '') {
+        Message.errorMesage("Author name", "Author name cannot be empty");
+        return false;
+      }
+
+      return false;
+    }
+
     return Scaffold(
       body: Container(
         width: double.maxFinite,
@@ -46,7 +61,7 @@ class AddQuotePage extends StatelessWidget {
               Column(
                 children: [
                   TextFieldWidget(
-                    textController: textEditingController,
+                    textController: quoteDescriptionController,
                     placeHolderText: "Add Quote",
                     borderRadius: 20,
                     maxLines: 5,
@@ -55,15 +70,27 @@ class AddQuotePage extends StatelessWidget {
                     height: 25,
                   ),
                   TextFieldWidget(
-                      textController: descriptionEditingController,
+                      textController: authorController,
                       placeHolderText: "Author name"),
                   const SizedBox(
                     height: 25,
                   ),
-                  const ButtonWidget(
-                      backgroundColor: AppColors.buttonColor,
-                      textColor: AppColors.buttonTextColor,
-                      buttonText: "Add Quote")
+                  GestureDetector(
+                    onTap: () {
+                      if (dataValidation()) {
+                        Get.find<DataController>().postQuotes(
+                            quoteDescriptionController.text.trim(),
+                            authorController.text.trim());
+                        Get.to(() => const ViewQuote(),
+                            transition: Transition.circularReveal);
+                      }
+                    },
+                    // ignore: prefer_const_constructors
+                    child: ButtonWidget(
+                        backgroundColor: AppColors.buttonColor,
+                        textColor: AppColors.buttonTextColor,
+                        buttonText: "Add Quote"),
+                  )
                 ],
               ),
               SizedBox(
